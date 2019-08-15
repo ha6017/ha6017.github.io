@@ -62,7 +62,7 @@ function handleSuccess(transactionInfo){
   // Determines whether error or success based on urlParams, then prints the string
 function printResponse() {
     console.log("checkpoint 3");
-    //var responseUrl = window.location.href;
+    var responseUrl = window.location.href;
     
     var transactionInfo = getTransactionInfo(responseUrl);
     var resultString = "";
