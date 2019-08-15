@@ -36,10 +36,35 @@
 <h2>Register a new user</h2>
 
 <input type="button" onclick="location.href = 
-'user_registration.html';" value="Click to Register a new user" />
+'https://ha6017.github.io/user_registration.html';" value="Click to Register a new user" />
 
 
 <script>
+
+            var dataParameter = {
+              amount_money: {
+                amount:        "500",
+                currency_code: "USD"
+              },
+          
+              // Replace this value with your application's callback URL
+              callback_url: "https://ha6017.github.io/callback.html",
+          
+              // Replace this value with your application's ID
+              client_id: "sq0idp-0BKuN18vmsKMlPj5Gmb1cw",
+          
+              version: "1.3",
+              notes: "notes for the transaction",
+              options: {
+                supported_tender_types: ["CREDIT_CARD","CASH","OTHER","SQUARE_GIFT_CARD","CARD_ON_FILE"]
+              }
+            };
+          
+            console.log("sending request");
+    
+            window.location =
+              "square-commerce-v1://payment/create?data=" +
+              encodeURIComponent(JSON.stringify(dataParameter));
 
 document.getElementById("myInput").focus();
 document.getElementById("myInput").select();
@@ -105,7 +130,7 @@ xhr.onload = function () {
         if(card_data=="true"){
             //console.log("checkpoint 4");
             //window.location.replace("file:///Users/hardy/Desktop/makerspaceIOT/Device-Master/index.html?cardid=${input.value}")
-            window.location.replace('index.html?cardid=${input.value}');
+            window.location.replace('https://ha6017.github.io/link_table.html?cardid='+input.value);
             //ESP_onOff();
             //console.log("checkpoint 5");
         }else{
