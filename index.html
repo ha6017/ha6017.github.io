@@ -77,7 +77,8 @@ input.addEventListener("keyup", function(event) {
    event.preventDefault();
   }
   if(input.value.length==10){
-    card_reader();
+    //card_reader();
+    window.location.replace('https://ha6017.github.io/link_table.html?cardid='+input.value);
     console.log(input.value);
     input.value="";
   }
