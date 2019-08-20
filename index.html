@@ -84,45 +84,45 @@ input.addEventListener("keyup", function(event) {
   }
 });
 
-function card_reader() { // Requests to load all the ESP data from the database
-var xhr = new XMLHttpRequest();
-xhr.onload = function () {
-    if (this.status == 200) {
-        card_data = this.responseText;
-        console.log(card_data);
-        if(card_data=="true"){
-            Addstamp();
-            window.location.replace('https://ha6017.github.io/link_table.html?cardid='+input.value);
-        }else{
-            input.value="";
-        }
-    }
-};
-//http://192.168.0.110:5000/registerCard?cardid=${input.value}&firstname=Joshua&lastname=Anderson
-xhr.open('GET', `http://192.168.0.161:5001/authenticateCard?cardid=${input.value}`, true); // Retrive ESP data
-xhr.send();
-}
+// function card_reader() { // Requests to load all the ESP data from the database
+// var xhr = new XMLHttpRequest();
+// xhr.onload = function () {
+//     if (this.status == 200) {
+//         card_data = this.responseText;
+//         console.log(card_data);
+//         if(card_data=="true"){
+//             Addstamp();
+//             window.location.replace('https://ha6017.github.io/link_table.html?cardid='+input.value);
+//         }else{
+//             input.value="";
+//         }
+//     }
+// };
+// //http://192.168.0.110:5000/registerCard?cardid=${input.value}&firstname=Joshua&lastname=Anderson
+// xhr.open('GET', `http://192.168.0.161:5001/authenticateCard?cardid=${input.value}`, true); // Retrive ESP data
+// xhr.send();
+// }
 
-function Addstamp(){
-    //console.log("Addstamp function");
-    var xhr = new XMLHttpRequest();
-    var date = new Date();
-    xhr.onload = function () {
+// function Addstamp(){
+//     //console.log("Addstamp function");
+//     var xhr = new XMLHttpRequest();
+//     var date = new Date();
+//     xhr.onload = function () {
 
-        if (this.status == 200) {
-            var data = this.responseText;
-            console.log(data);
-            //console.log("checkpoint 8");
-        }
-    };
-    //var timestamp= date.getTime();
-    //console.log(input_clone.value);
+//         if (this.status == 200) {
+//             var data = this.responseText;
+//             console.log(data);
+//             //console.log("checkpoint 8");
+//         }
+//     };
+//     //var timestamp= date.getTime();
+//     //console.log(input_clone.value);
 
-    xhr.open('GET', `http://192.168.0.161:5001/addTimestamp?cardid=${input.value}&date=${date}`, true);
-    xhr.send();
+//     xhr.open('GET', `http://192.168.0.161:5001/addTimestamp?cardid=${input.value}&date=${date}`, true);
+//     xhr.send();
 
-    //xhr.open('GET', `http://192.168.0.158:80/onOff?plug=1}`, true);
-    //xhr.send();
+//     //xhr.open('GET', `http://192.168.0.158:80/onOff?plug=1}`, true);
+//     //xhr.send();
 
 }
 </script>
