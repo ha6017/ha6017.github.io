@@ -1,0 +1,23 @@
+{
+  "name": "ha6017.github.io",
+  "version": "1.0.0",
+  "description": "Setting up the Master Website.",
+  "main": "callback.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ha6017/ha6017.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ha6017/ha6017.github.io/issues"
+  },
+  "homepage": "https://github.com/ha6017/ha6017.github.io#readme",
+  "dependencies": {
+    "mongodb": "^3.3.0"
+  }
+}

@@ -11,68 +11,65 @@
                           
                 </style>
         </head> -->
+
+
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+                img {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .hideme{
+                    display: none;
+                    visibility:hidden;
+                }
+            </style>
+        </head>
 <body>
 
-<h1>TAP YOUR CARD ON THE CARD READER</h1>
-<p>A registered user will be redirected to the ESP webpage</p>
+<img src='Web 1920 – 1 (1)/IdeasLabBlackSIDE.png' style='position:absolute; top:10; left:10;' width='' height='' alt='' />
 
-<input id="myInput" type="password" value=""/>
+<img src="Web 1920 – 1 (1)/Image 1.png" width='700' height='700' class="img" align="center" />
 
-<!-- <h2>NEW USER</h2>
+<h1 align="center">TAP YOUR COLLEGE CARD TO BEGIN</h1>
 
-    <div>
-      <label for="uname"><b>First Name</b></label>
-      <input id="name_user" type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Family name</b></label>
-      <input id="psw_user" type="text" placeholder="Enter Password" name="psw" required>
-
-      <label for="card_val"><b>Card</b></label>
-      <input id="card_user" type="password" placeholder="tap card" name="num_card" required>
-        
-      <button onclick="new_call()" >submit</button>
-    </div> -->
-
-<h2>Register a new user</h2>
-
-<input type="button" onclick="location.href = 
-'https://ha6017.github.io/user_registration.html';" value="Click to Register a new user" />
-
-
+<div text-align="center">
+    <input id="myInput" type="password" value="" />
+</div>
+    
 <script>
 
-            var dataParameter = {
-              amount_money: {
-                amount:        "2",
-                currency_code: "GBP"
-              },
+            // var dataParameter = {
+            //   amount_money: {
+            //     amount:        "2",
+            //     currency_code: "GBP"
+            //   },
           
-              // Replace this value with your application's callback URL
-              callback_url: "https://ha6017.github.io/callback.html",
+            //   // Replace this value with your application's callback URL
+            //   callback_url: "https://ha6017.github.io/callback.html",
           
-              // Replace this value with your application's ID
-              client_id: "sq0idp-0BKuN18vmsKMlPj5Gmb1cw",
+            //   // Replace this value with your application's ID
+            //   client_id: "sq0idp-0BKuN18vmsKMlPj5Gmb1cw",
           
-              version: "1.3",
-              notes: "notes for the transaction",
-              options: {
-                supported_tender_types: ["CREDIT_CARD","CASH","OTHER","SQUARE_GIFT_CARD","CARD_ON_FILE"]
-              }
-            };
+            //   version: "1.3",
+            //   notes: "notes for the transaction",
+            //   options: {
+            //     supported_tender_types: ["CREDIT_CARD","CASH","OTHER","SQUARE_GIFT_CARD","CARD_ON_FILE"]
+            //   }
+            // };
           
-            console.log("sending request");
+            // console.log("sending request");
     
-            window.location =
-              "square-commerce-v1://payment/create?data=" +
-              encodeURIComponent(JSON.stringify(dataParameter));
+            // window.location =
+            //   "square-commerce-v1://payment/create?data=" +
+            //   encodeURIComponent(JSON.stringify(dataParameter));
 
 document.getElementById("myInput").focus();
 document.getElementById("myInput").select();
 
 var input = document.getElementById("myInput");
-// var input_fname = document.getElementById("name_user");
-// var input_sname = document.getElementById("psw_user");
-// var input_cname = document.getElementById("card_user");
 
 input.addEventListener("keyup", function(event) {
     
@@ -80,59 +77,21 @@ input.addEventListener("keyup", function(event) {
    event.preventDefault();
   }
   if(input.value.length==10){
-    //console.log("checkpoint 1");
     card_reader();
-    //console.log("checkpoint 2");
-    //var hardik = input.value;
+    console.log(input.value);
     input.value="";
-    //console.log("checkpoint 1");
-    //console.log(hardik.value);
   }
 });
 
-// input_cname.addEventListener("keyup", function(event) {
-//   if (event.keyCode === 13) {
-//    event.preventDefault();
-//   }
-//   if(input_cname.value.length==10){
-//     //console.log("work please");
-//     new_call();
-//     input.value="";
-//   }
-// });
-
-// function new_call(){
-//     //console.log("hardik is the best");
-//     var xhr1 = new XMLHttpRequest();
-//     //console.log("stay");
-//     xhr1.onload = function () {
-//     //console.log("something");
-//     if (this.status == 200) {
-//         card_data2 = this.responseText;
-//         //console.log(card_data2);
-//     }
-// };
-//http://192.168.0.110:5000/registerCard?cardid=${input.value}&firstname=${input_fname.value}&familyname=${input_sname.value}
-// xhr1.open('GET', `http://192.168.0.160:5001/registerCard?cardid=${input_cname.value}&firstname=${input_fname.value}&familyname=${input_sname.value}`, true); // Retrive ESP data
-// xhr1.send();
-// }
-
 function card_reader() { // Requests to load all the ESP data from the database
-//console.log("checkpoint 3");
-//console.log("loadESPs");
 var xhr = new XMLHttpRequest();
 xhr.onload = function () {
     if (this.status == 200) {
         card_data = this.responseText;
         console.log(card_data);
-        //console.log(`Loaded ${Object.keys(ESPdata).length} ESP(s) from database`); 
-        //reloadDisplay();
         if(card_data=="true"){
-            //console.log("checkpoint 4");
-            //window.location.replace("file:///Users/hardy/Desktop/makerspaceIOT/Device-Master/index.html?cardid=${input.value}")
+            Addstamp();
             window.location.replace('https://ha6017.github.io/link_table.html?cardid='+input.value);
-            //ESP_onOff();
-            //console.log("checkpoint 5");
         }else{
             input.value="";
         }
@@ -141,33 +100,6 @@ xhr.onload = function () {
 //http://192.168.0.110:5000/registerCard?cardid=${input.value}&firstname=Joshua&lastname=Anderson
 xhr.open('GET', `http://192.168.0.161:5001/authenticateCard?cardid=${input.value}`, true); // Retrive ESP data
 xhr.send();
-}
-
-function ESP_onOff() {
-//console.log("checkpoint 6");
-//console.log("onOff function");
-var xhr = new XMLHttpRequest();
-//var date = new Date();
-xhr.onload = function () {
-
-    if (this.status == 200) {
-        var data = this.responseText;
-        console.log(data);
-        //console.log("checkpoint 7");
-        Addstamp();
-    }
-};
-//var timestamp= date.getTime();
-//console.log(date);
-
-//xhr.open('GET', `http://192.168.0.160:5001/addTimestamp?cardid=${input.value}&date=${date}`, true);
-//xhr.send();
-
-xhr.open('GET', `http://192.168.0.158:80/onOff?plug=1}`, true);
-xhr.send();
-
-
-
 }
 
 function Addstamp(){
