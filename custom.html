@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .center-block {
+                margin: auto;
+                display: block;
+            }
+            .something {
+                vertical-align: 40%;
+            }
+        </style>
+    </head>
+<body>
+
+<img src='Web 1920 – 1 (1)/IdeasLabBlackSIDE.png' style='position:absolute; top:10; left:10;' width='' height='' alt='' />
+
+<br>
+    <br>
+    <br><br><br>
+    <h1 align="center" class="something">Hi ${Michael}, you have ${£0} credit </h1>
+    <br><br>
+    <h2 align="center"> Enter top-up amount </h2>
+    <br><br><br>
+    <div>
+        <input type="number" value="" class="center-block" id="myinput">
+    </div>
+
+    <button type="button" onclick="sending_custom()" class="center-block"> Submit </button>
+    
+    
+<script>
+
+    var string = window.location.href;
+
+    var cardid = string.slice(-10); 
+
+    function sending_custom(){
+        
+        var input = document.getElementById("myinput");
+
+        console.log(input.value);
+        var dataParameter = {
+              amount_money: {
+                amount:        input.value,
+                currency_code: "GBP"
+              },
+          
+              // Replace this value with your application's callback URL
+              callback_url: "https://ha6017.github.io/callback.html",
+          
+              // Replace this value with your application's ID
+              client_id: "sq0idp-0BKuN18vmsKMlPj5Gmb1cw",
+
+              card_id: cardid,
+          
+              version: "1.3",
+              notes: "notes for the transaction",
+              options: {
+                supported_tender_types: ["CREDIT_CARD"]
+              }
+            };
+          
+            console.log("sending request");
+    
+            window.location =
+              "square-commerce-v1://payment/create?data=" +
+              encodeURIComponent(JSON.stringify(dataParameter));
+    }
+</script>
+
+</body>
+</html>
+
