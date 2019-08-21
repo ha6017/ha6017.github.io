@@ -6,14 +6,14 @@ const transactionId = "transaction_id";
 const errorField = "error_code";
 
 //Test response URL
-// const responseUrl = new URL(
-//     '/create?data={' +
-//       '"transaction_id":"transaction123",' +
-//       '"client_transaction_id":"40",' +
-//       '"status":"ok"' +
-//     '}',
-//     'https://squareup.com'
-//   );
+const responseUrl = new URL(
+    '/create?data={' +
+      '"transaction_id":"transaction123",' +
+      '"client_transaction_id":"40",' +
+      '"status":"ok"' +
+    '}',
+    'https://squareup.com'
+  );
   
 console.log("hardik");
 
