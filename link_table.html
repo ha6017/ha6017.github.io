@@ -57,7 +57,6 @@
     var string = window.location.href;
 
     var cardid = string.slice(-10);
-    console.log(card_id);
 
     function send_call(){
         var dataParameter = {
@@ -149,7 +148,7 @@
     }
     function custom(){
         console.log("checkpoint 4");
-        window.location.replace('https://ha6017.github.io/custom.html?cardid='+input.value);
+        window.location.replace('https://ha6017.github.io/custom.html?cardid='+cardid);
     }
 
 
