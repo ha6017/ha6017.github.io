@@ -67,12 +67,12 @@ function handleError(transactionInfo) {
 // Determines whether error or success based on urlParams, then prints the string
 function printResponse() {
   console.log("cp3");
-  var responseUrl2 = window.location.href;
-  console.log(responseUrl.href);
-  console.log('URL demo: '+ responseUrl);
+  var responseUrl2 = new URL(window.location.href);
+  // console.log(responseUrl.href);
+  // console.log('URL demo: '+ responseUrl);
   //document.getElementById('url1').innerHTML = responseUrl;
 
-  var transactionInfo = getTransactionInfo(responseUrl.href);
+  var transactionInfo = getTransactionInfo(responseUrl2);
   var resultString = "";
 
   if (errorField in transactionInfo) {
