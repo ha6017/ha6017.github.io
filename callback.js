@@ -6,89 +6,83 @@ const transactionId = "transaction_id";
 const errorField = "error_code";
 
 //Test response URL
-// const responseUrl = new URL(
-//     '/create?data={' +
-//       '"transaction_id":"transaction123",' +
-//       '"client_transaction_id":"40",' +
-//       '"status":"ok"' +
-//     '}',
-//     'https://squareup.com'
-//   );
-  
+const responseUrl = new URL(
+  '/callback.html?data={' +
+  '"transaction_id":"transaction123",' +
+  '"client_transaction_id":"40",' +
+  '"status":"ok"' +
+  '}',
+  'https://ha6017.github.io'
+);
+
 console.log(" hardik");
 
 //get the data URL and encode in JSON
-function getTransactionInfo(URL) {
-    console.log("URL: " + URL);
+function getTransactionInfo(URL) { //page URL is bieng passed as an argument to the function
+  console.log("URL: " + URL);
 
-    var data  = decodeURI(URL.searchParams.get('data'));
-    console.log("data:  " + data);
+  var data = decodeURI(URL.searchParams.get('data'));
+  console.log("data:  " + data);
 
-    // var searchParam1 = data['data'];
-    // console.log("searchparam1: " + searchParam1);
+  var transactionInfo = JSON.parse(data);
+  console.log("transactionInfo: " + transactionInfo);
+  return transactionInfo;
+}
 
-    //console.log(data.searchParams.get('data'));
-
-    // let param = data.searchParams.get("data");
-    // console.log("param: " + param);
-
-    var transactionInfo = JSON.parse(data);
-    return transactionInfo;
-
-    //return data;
-  }
-
-  //URL.searchParams.get('data')
+//URL.searchParams.get('data')
 
 // Makes a result string for success situation
-function handleSuccess(transactionInfo){
-    var resultString ="";
-  
-    if (clientTransactionId in transactionInfo) {
-      resultString += "Client Transaction ID: " + transactionInfo[clientTransactionId] + "<br>";
-    }
-    if (transactionId in transactionInfo) {
-      resultString += "Transaction ID: " + transactionInfo[transactionId] + "<br>";
-    }
-     else {
-      resultString += "Transaction ID: NO CARD USED<br>";
-    }
-    return resultString;
+function handleSuccess(transactionInfo) {
+  var resultString = "";
+
+  if (clientTransactionId in transactionInfo) {
+    resultString += "Client Transaction ID: " + transactionInfo[clientTransactionId] + "<br>";
   }
-  
-  
-  // Makes an error string for error situation
-  function handleError(transactionInfo){
-    var resultString ="";
-  
-    if (errorField in transactionInfo) {
-      resultString += "Client Transaction ID: " + transactionInfo[clientTransactionId] + "<br>";
-    }
-    if (transactionId in transactionInfo) {
-      resultString += "Transaction ID: " + transactionInfo[transactionId] + "<br>";
-    }
-     else {
-      resultString += "Transaction ID: PROCESSED OFFLINE OR NO CARD USED<br>";
-    }
-    return resultString;
+  if (transactionId in transactionInfo) {
+    resultString += "Transaction ID: " + transactionInfo[transactionId] + "<br>";
   }
-  
-  // Determines whether error or success based on urlParams, then prints the string
-function printResponse() {
-    console.log("cp3");
-    var responseUrl = window.location.href;
-    //document.getElementById('url1').innerHTML = responseUrl;
-    
-    var transactionInfo = getTransactionInfo(responseUrl);
-    var resultString = "";
-  
-    if (errorField in transactionInfo) {
-      resultString = handleError(transactionInfo);
-    } else {
-      resultString = handleSuccess(transactionInfo);
-    }
-  
-    document.getElementById('url').innerHTML = resultString;
+  else {
+    resultString += "Transaction ID: NO CARD USED<br>";
+  }
+  return resultString;
 }
-  
-  
+
+
+// Makes an error string for error situation
+function handleError(transactionInfo) {
+  var resultString = "";
+
+  if (errorField in transactionInfo) {
+    resultString += "Client Transaction ID: " + transactionInfo[clientTransactionId] + "<br>";
+  }
+  if (transactionId in transactionInfo) {
+    resultString += "Transaction ID: " + transactionInfo[transactionId] + "<br>";
+  }
+  else {
+    resultString += "Transaction ID: PROCESSED OFFLINE OR NO CARD USED<br>";
+  }
+  return resultString;
+}
+
+// Determines whether error or success based on urlParams, then prints the string
+function printResponse() {
+  console.log("cp3");
+  var responseUrl2 = window.location.href;
+  console.log(responseUrl.href);
+  console.log('URL demo: '+ responseUrl);
+  //document.getElementById('url1').innerHTML = responseUrl;
+
+  var transactionInfo = getTransactionInfo(responseUrl.href);
+  var resultString = "";
+
+  if (errorField in transactionInfo) {
+    console.log("ERROR THROWN");
+    resultString = handleError(transactionInfo);
+  } else {
+    console.log("SUCCESS");
+    resultString = handleSuccess(transactionInfo);
+  }
+
+  document.getElementById('url').innerHTML = resultString;
+}
+
