@@ -1,19 +1,24 @@
 //If successful, Square Point of Sale returns the following parameters.
 const clientTransactionId = "client_transaction_id";
 const transactionId = "transaction_id";
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Hardik:ee188001@cluster0-xkiex.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
 
 //If there's an error, Square Point of Sale returns the following parameters.
 const errorField = "error_code";
 
 //Test response URL
-const responseUrl = new URL(
-  '/callback.html?data={' +
-  '"transaction_id":"transaction123",' +
-  '"client_transaction_id":"40",' +
-  '"status":"ok"' +
-  '}',
-  'https://ha6017.github.io'
-);
+// const responseUrl = new URL(
+//   '/callback.html?data={' +
+//   '"transaction_id":"transaction123",' +
+//   '"client_transaction_id":"40",' +
+//   '"status":"ok"' +
+//   '}',
+//   'https://ha6017.github.io'
+// );
 
 console.log(" hardik");
 
@@ -40,6 +45,36 @@ function handleSuccess(transactionInfo) {
   }
   if (transactionId in transactionInfo) {
     resultString += "Transaction ID: " + transactionInfo[transactionId] + "<br>";
+
+    client.connect(err => {
+      const collection = client.db("Ideas_lab").collection("User_info");
+      // perform actions on the collection object
+      console.log("connected");
+
+      var query = { 'Card Id': transactionInfo[card_id]};
+        collection.find(query).toArray(function(err, res){
+            if(err) throw err;
+            console.log(res);
+            if(res=="[]"){
+                console.log("false");
+            }else{
+                console.log("true");
+                var cred = res[0].Credit;
+                console.log(cred);
+                cred = cred + transactionInfo[Amount_money[amount]];
+                console.log(cred);
+            }
+        });
+        
+      var newvalues = { $set: {Credit: cred } };
+      collection.updateOne(query, newvalues, function(err, res) {
+        if (err) throw err;
+        console.log("1 document updated");
+      });
+  
+      client.close();
+    });
+
   }
   else {
     resultString += "Transaction ID: NO CARD USED<br>";

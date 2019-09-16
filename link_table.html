@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-    span.a{
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        border: 1px solid grey;
-        background-color: gray;
-        box-sizing: border-box;
-        margin-inline-start: 40%;
-        vertical-align: middle;
-        box-align: center;
-        line-height: 100px;
-    }
-    span.b{
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        border: 1px solid grey;
-        background-color: gray;
-        box-sizing: border-box;
-        margin-inline-start: 2%; 
-        vertical-align: middle;
-        line-height: 100px;
-    }
+    <head>
+        <style>
+            span.a{
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border: 1px solid grey;
+                background-color: gray;
+                box-sizing: border-box;
+                margin-inline-start: 40%;
+                vertical-align: middle;
+                box-align: center;
+                line-height: 100px;
+            }
+            span.b{
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border: 1px solid grey;
+                background-color: gray;
+                box-sizing: border-box;
+                margin-inline-start: 2%; 
+                vertical-align: middle;
+                line-height: 100px;
+            }
+        </style>
 
-</style>
-</head>
-<body>
+        <script src= "index.js"></script>
+
+    </head>
+    <body onload = 'Database_call()'>
 
     <img src='Web 1920 – 1 (1)/IdeasLabBlackSIDE.png' style='position:absolute; top:10; left:10;' width='' height='' alt='' />
 
@@ -36,7 +38,7 @@
     <br>
     <br>
     <br><br>
-    <h1 align="center">Hi ${Michael}, you have ${£0} credit </h1>
+    <h1 align="center" id='Heading'></h1>
     <br>
     <br>
     <h2 align="center">Select top-up amount</h2>
@@ -54,11 +56,20 @@
 
 <script>
 
-    var string = window.location.href;
+    
+    function Database_call(){
+        console.log("hardikkkkkk");
+        var string = window.location.href;
 
-    var cardid = string.slice(-10);
+        var cardid = string.slice(-10); // ADD a better way to gte the value of cardid.
+                                        // This will fail if something else is passed in the URL
 
-    function send_call(){
+        db_call(cardid);
+
+    }
+
+
+    function send_call(){ //triggers square payment platform.
         var dataParameter = {
               amount_money: {
                 amount:        "500",
