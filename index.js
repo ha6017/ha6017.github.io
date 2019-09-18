@@ -3,7 +3,8 @@
 //on recieving the request processes it e.g talking to database and replies back with a response top index.js. 
 
 
-var serverIP = "localhost:5000"; // USIng a local server. Could be scaled to online server as well.
+//var serverIP = "146.169.183.61:5000"; // USIng a local server. Could be scaled to online server as well.
+var serverIP = "192.168.29.41:5000";
 var userData;
 
 
