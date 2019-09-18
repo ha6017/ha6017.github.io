@@ -7,25 +7,6 @@ var serverIP = "localhost:5000"; // USIng a local server. Could be scaled to onl
 var userData;
 
 
-// function createCORSRequest(method, url) { //Method to make CORS policy compliant request to allow cross domain access
-//     var xhr = new XMLHttpRequest();
-//     if ("withCredentials" in xhr) {
-//       // XHR for Chrome/Firefox/Opera/Safari.
-//       xhr.open(method, url, true);
-
-//     } else if (typeof XDomainRequest != "undefined") {
-//       // XDomainRequest for IE.
-//       xhr = new XDomainRequest();
-//       xhr.open(method, url);
-//       xhr.setRequestHeader('Content-Type', 'application/json');
-//     } else {
-//       // CORS not supported.
-//       xhr = null;
-//     }
-//     return xhr;
-//   }
-  
-
 function findUser(cardID) { // called from index.html. First function used to check if the user is registered or not
 
     var data = JSON.stringify({ "Card ID": cardID });
@@ -83,8 +64,6 @@ function db_call(cardID) { // called from link_table.html. TRiggers server to se
                 console.log('ERROR LOADING USERS');
                 alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
             } else {
-                //window.location.replace('https://ha6017.github.io/link_table.html?cardid='+cardID);
-                //console.log(userData);
                 var info = document.getElementById('Heading');
                 info.innerHTML = 'Hi ' + userData[0]['First Name'] + ', you have £' + userData[0].Credit + ' balance in your account.';
             }

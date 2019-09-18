@@ -2,38 +2,6 @@ var string = window.location.href;
 
     var cardid_get = string.slice(-10); 
 
-    // const MongoClient = require('mongodb').MongoClient;
-    // const uri = "mongodb+srv://Hardik:ee188001@cluster0-xkiex.mongodb.net/test?retryWrites=true&w=majority";
-    // const client = new MongoClient(uri, { useNewUrlParser: true });
-    // client.connect(err => {
-    // const collection = client.db("Ideas_lab").collection("User_info");
-    // // perform actions on the collection object
-    // console.log("connected");
-
-    //     // var ins={name: 'michael', email:'joshua.anderson17@imperial.ac.uk', cardid: '1234567899'};
-    //     // collection.insertOne(ins, function(err,res){
-    //     //     console.log("data inserted");
-    //     // });
-
-    //     var query = { cardid: cardid_get};
-
-    //         collection.find(query).toArray(function(err, res){
-    //             if(err) throw err;
-    //             console.log(res);
-    //             if(res=="[]"){
-    //                 console.log("false");
-    //             }else{
-    //                 console.log("true");
-    //                 var title = document.getElementById('imma');
-    //                 console.log(res[0].name);
-    //                 title.innerHTML = 'Hi '+ res[0].Email + ', you have ' + res[0].Credit +'£ credit';
-    //             }
-    //         });
-
-    // client.close();
-    // });
-
-
     function sending_custom(){
         
         var input = document.getElementById("myinput");

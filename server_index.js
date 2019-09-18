@@ -15,16 +15,6 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bo
 app.use(cors())
 
-// app.post("/findUser", (req, res) => {
-//     console.log('req.body = ' + JSON.stringify(req.body));
-
-//     //console.log('finding user with card ID: ' + card_ID);
-//     var que = { 'Card ID': card_ID };
-
-//    /*  dbUtil.findExt("User_info", que, dbres => {
-//         sendCORS(res, 200, dbres);
-//     });*/
-// }); 
 
 
 
