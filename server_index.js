@@ -51,13 +51,46 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/findUser", (req, res) => {
-    console.log('req.body = ' + JSON.stringify(req.body));
+    console.log("FIND USER");
+    //console.log('req.body = ' + JSON.stringify(req.body));
     var card_ID = req.body["Card ID"];
-    console.log('check type ' + card_ID);
-    console.log('finding user with card ID: ' + card_ID);
+    //console.log('check type ' + card_ID);
+    //console.log('finding user with card ID: ' + card_ID);
     var que = {'Card ID': card_ID};
-    console.log('que = ' + que);
+    //console.log('que = ' + que);
     dbUtil.findExt("User_info", que, dbres => {
+        sendCORS(res, 200, dbres);
+    });
+});
+
+app.post("/update", (req, res) => {
+    console.log("CALLED UPDATE");
+    //console.log('hxdrxtrcv = ' + JSON.stringify(req.body));
+    var card_ID = req.body["Card ID"];
+    var Amo = req.body["Update Credit"];
+    //console.log('check type ' + Amo);
+    //console.log('finding user with card ID: ' + card_ID);
+    var que = {'Card ID': card_ID};
+    var obj = {'Update Credit': Amo};
+    //console.log('que = ' + que);
+    //console.log('obj = ' + obj);
+    dbUtil.update("User_info", que, obj, dbres => {
+        sendCORS(res, 200, dbres);
+    });
+});
+
+app.post("/updateamo", (req, res) => {
+    console.log("UPDATE AMO");
+    //console.log('hxdrxtrcv = ' + JSON.stringify(req.body));
+    var card_ID = req.body["Card ID"];
+    var Amo = req.body["Update Credit"];
+    //console.log('check type ' + Amo);
+    //console.log('finding user with card ID: ' + card_ID);
+    var que = {'Card ID': card_ID};
+    var obj = {Credit: Amo};
+    // console.log('que = ' + que);
+    // console.log('obj = ' + obj);
+    dbUtil.update("User_info", que, obj, dbres => {
         sendCORS(res, 200, dbres);
     });
 });

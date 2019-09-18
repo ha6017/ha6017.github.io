@@ -29,7 +29,7 @@ var userData;
 function findUser(cardID) { // called from index.html. First function used to check if the user is registered or not
 
     var data = JSON.stringify({ "Card ID": cardID });
-    console.log('data = ' + data);
+    //console.log('data = ' + data);
 
     var url = `http://${serverIP}/findUser`;
     //var xhr = createCORSRequest('POST', url);
@@ -47,7 +47,7 @@ function findUser(cardID) { // called from index.html. First function used to ch
                 alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
             } else {
                 window.location.replace('https://ha6017.github.io/link_table.html?cardid='+cardID);
-                console.log('userData=' + userData);
+                //console.log('userData=' + userData);
             }
         }
       };
@@ -58,13 +58,13 @@ function findUser(cardID) { // called from index.html. First function used to ch
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    console.log(xhr);
+    //console.log(xhr);
     xhr.send(data);
 }
 
 function db_call(cardID) { // called from link_table.html. TRiggers server to send babck all the information and then 
                         //i query the name and cedit from the personds account
-    console.log("cardid=" + cardID);
+    //console.log("cardid=" + cardID);
 
     var data = JSON.stringify({ "Card ID": cardID });
     //console.log('data = ' + data);
@@ -84,7 +84,7 @@ function db_call(cardID) { // called from link_table.html. TRiggers server to se
                 alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
             } else {
                 //window.location.replace('https://ha6017.github.io/link_table.html?cardid='+cardID);
-                console.log(userData);
+                //console.log(userData);
                 var info = document.getElementById('Heading');
                 info.innerHTML = 'Hi ' + userData[0]['First Name'] + ', you have £' + userData[0].Credit + ' balance in your account.';
             }
@@ -97,5 +97,117 @@ function db_call(cardID) { // called from link_table.html. TRiggers server to se
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     console.log(xhr);
+    xhr.send(data);
+}
+
+function db_update(cardID, amount) { // called from link_table.html. TRiggers server to send babck all the information and then 
+    //i query the name and cedit from the personds account
+    //console.log("cardid=" + cardID);
+    //console.log("amount =" + amount);
+
+    var data = JSON.stringify({ "Card ID": cardID, "Update Credit": amount});
+    //console.log('data = ' + data);
+    var url = `http://${serverIP}/update`;
+    //var xhr = createCORSRequest('POST', url);
+    var xhr = new XMLHttpRequest();
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
+    }
+
+    xhr.onload = function() {
+        if (this.status == 200 && this.readyState==4) {
+            userData = JSON.parse(this.responseText);
+            if (userData == '[]') {
+                console.log('ERROR LOADING USERS');
+                alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
+            } else {
+                //window.location.replace('https://ha6017.github.io/link_table.html?cardid='+cardID);
+                //console.log(userData);
+                }
+            }
+    };
+
+    xhr.onerror = function() {
+        alert('Woops, there was an error making the request.');
+    };
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    console.log(xhr);
+    xhr.send(data);
+}
+
+function db_updatecred(cardID, amount) { // called from link_table.html. TRiggers server to send babck all the information and then 
+    //i query the name and cedit from the personds account
+    //console.log("cardid=" + cardID);
+    //console.log("amount =" + amount);
+
+    var data = JSON.stringify({ "Card ID": cardID, "Update Credit": amount});
+    //console.log('data = ' + data);
+    var url = `http://${serverIP}/updateamo`;
+    //var xhr = createCORSRequest('POST', url);
+    var xhr = new XMLHttpRequest();
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
+    }
+
+    xhr.onload = function() {
+        if (this.status == 200 && this.readyState==4) {
+            userData = JSON.parse(this.responseText);
+            if (userData == '[]') {
+                console.log('ERROR LOADING USERS');
+                alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
+            } else {
+                //window.location.replace('https://ha6017.github.io/link_table.html?cardid='+cardID);
+                //console.log(userData);
+                }
+            }
+    };
+
+    xhr.onerror = function() {
+        alert('Woops, there was an error making the request.');
+    };
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    //console.log(xhr);
+    xhr.send(data);
+}
+
+function update_credit(cardID){
+    //console.log("cardid=" + cardID);
+
+    var data = JSON.stringify({ "Card ID": cardID });
+    //console.log('data = ' + data);
+    var url = `http://${serverIP}/findUser`;
+    //var xhr = createCORSRequest('POST', url);
+    var xhr = new XMLHttpRequest();
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
+      }
+
+    xhr.onload = function() {
+        if (this.status == 200 && this.readyState==4) {
+            userData = JSON.parse(this.responseText);
+            if (userData == '[]') {
+                console.log('ERROR LOADING USERS');
+                alert('USER NOT REGISTERED. Contact Michael Hofmann to Register yourself');
+            } else {
+                //console.log(userData);
+                var new_amo = userData[0].Credit + userData[0]['Update Credit'];
+                console.log("new amount = " + new_amo);
+                db_updatecred(cardID, new_amo);
+                //info.innerHTML = 'Hi ' + userData[0]['First Name'] + ', you have £' + userData[0].Credit + ' balance in your account.';
+            }
+        }
+      };
+    
+    xhr.onerror = function() {
+        alert('Woops, there was an error making the request.');
+      };
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    //console.log(xhr);
     xhr.send(data);
 }

@@ -3,15 +3,16 @@
   <head>
     <!-- Loads callback javascript -->
       <script type="text/javascript" src="callback.js"></script>
+      <script src= "index.js"></script>
       <!-- <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script> -->
 
   </head>
 
   <!-- Calls printResponse() when this page loads -->
-  <body onload="printResponse()">
-  <!-- <body> -->
+  <!-- <body onload="printResponse()"> -->
+  <body>
 
-    <h1>Thanks for making the payment!</h1>
+    <h1>Please tap your college card at the reader again to complete transaction</h1>
 
     <div id="url">
           <!-- empty URL for displaying response -->
@@ -21,24 +22,34 @@
         <!-- empty URL for displaying response -->
     </div>
 
-    <!-- <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+    <div id="url2">
+        <!-- empty URL for displaying response -->
+        
+    </div>
+    <input id="myInput" value="" />
+  
     <script>
-      const client = stitch.Stitch.initializeDefaultAppClient('makerspace-emvum');
 
-      const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('IOT');
-
-      client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
-        db.collection('Userlog').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
-      ).then(() =>
-        db.collection('Userlog').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
-      ).then(docs => {
-          console.log("Found docs", docs)
-          console.log("[MongoDB Stitch] Connected to Stitch")
-      }).catch(err => {
-        console.error(err)
-      });
-    </script> -->
-
+        document.getElementById("myInput").focus();
+        document.getElementById("myInput").select();
+        
+        var input = document.getElementById("myInput");
+        console.log(input.value);
+        
+        input.addEventListener("keyup", function(event) {
+            
+          if (event.keyCode === 13) {
+           event.preventDefault();
+          }
+          if(input.value.length==10){
+            console.log(input.value);
+            //findUser(input.value);
+            printResponse(input.value);
+          }
+        }); 
+        
+        </script>
+  
   </body>
 
 </html>

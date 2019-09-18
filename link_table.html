@@ -55,14 +55,14 @@
     
 
 <script>
+var string = window.location.href;
 
+var cardid = string.slice(-10); // ADD a better way to gte the value of cardid.
+                                // This will fail if something else is passed in the URL
     
     function Database_call(){
         console.log("hardikkkkkk");
-        var string = window.location.href;
-
-        var cardid = string.slice(-10); // ADD a better way to gte the value of cardid.
-                                        // This will fail if something else is passed in the URL
+        
 
         db_call(cardid);
 
@@ -90,6 +90,8 @@
                 supported_tender_types: ["CREDIT_CARD"]
               }
             };
+            var Amo = 5;
+            db_update(cardid, Amo);
           
             console.log("sending request");
     
@@ -120,6 +122,8 @@
                 supported_tender_types: ["CREDIT_CARD"]
               }
             };
+            var Amo = 10;
+            db_update(cardid, Amo);
           
             console.log("sending request");
     
@@ -150,6 +154,9 @@
                 supported_tender_types: ["CREDIT_CARD"]
               }
             };
+
+            var Amo = 20;
+            db_update(cardid, Amo);
           
             console.log("sending request");
     

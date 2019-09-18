@@ -13,7 +13,7 @@ var mongoURI = "mongodb+srv://Joshua:hardik@cluster0-xkiex.mongodb.net/test?retr
 module.exports = {
 
     findExt: function (coll, query, responsefunc) {
-        console.log('query = ' + query['Card ID']);
+        //console.log('query = ' + query['Card ID']);
 
         MongoClient.connect(mongoURI, { useNewUrlParser: true }, (err, client) => {
 
@@ -21,14 +21,33 @@ module.exports = {
                 db = client.db('Ideas_lab');
                 db.collection(coll).find(query).toArray((err, dbres) => {
                     if (err) throw err;
-                    console.log("documents found");
-                    console.log(dbres);
+                    //console.log("documents found");
+                    //console.log(dbres);
                     client.close();
                     responsefunc(dbres);
                 });
             } else {
                 console.log(err);
             }
+        });
+    },
+
+    update: function (collection, query, obj, responsefunc) {
+        //console.log('query = ' + query['Card ID']);
+        //console.log('obj = ' + obj['Update Credit']);
+
+        MongoClient.connect(mongoURI, { useNewUrlParser: true }, function (err, db) {
+            if (err) throw err;
+            console.log("inside update");
+            var dbo = db.db("Ideas_lab");
+            var setObj = { $set: obj };
+
+            dbo.collection(collection).updateOne(query, setObj, function (err, dbres) {
+                if (err) throw err;
+                console.log("no error thrown");
+                db.close();
+                responsefunc(dbres);
+            });
         });
     },
 
@@ -178,7 +197,7 @@ module.exports = {
 
     upsert: function (collection, query, obj, responsefunc) {
 
-        MongoClient.connect(mongoURL, { useNewUrlParser: true }, function (err, db) {
+        MongoClient.connect(mongoURI, { useNewUrlParser: true }, function (err, db) {
             if (err) throw err;
 
             var dbo = db.db("makerspace");
@@ -192,21 +211,7 @@ module.exports = {
         });
     },
 
-    update: function (collection, query, obj, responsefunc) {
-
-        MongoClient.connect(mongoURL, { useNewUrlParser: true }, function (err, db) {
-            if (err) throw err;
-
-            var dbo = db.db("makerspace");
-            var setObj = { $set: obj };
-
-            dbo.collection(collection).updateOne(query, setObj, function (err, dbres) {
-                if (err) throw err;
-                db.close();
-                responsefunc(dbres);
-            });
-        });
-    }
+    
 };
 
 /*
