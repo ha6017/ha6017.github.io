@@ -13,7 +13,7 @@ function findUser(cardID) { // called from index.html. First function used to ch
     var data = JSON.stringify({ "Card ID": cardID });
     //console.log('data = ' + data);
 
-    var url = `http://${serverIP}/findUser`;
+    var url = `https://${serverIP}/findUser`;
     //var xhr = createCORSRequest('POST', url);
     var xhr = new XMLHttpRequest();
     if (!xhr) {
